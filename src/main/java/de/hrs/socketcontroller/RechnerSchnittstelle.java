@@ -2,9 +2,11 @@ package de.hrs.socketcontroller;
 
 import de.hrs.Rechner.AnalyseMehereVergleichsstrecken;
 import de.hrs.dao.EurUsdDao;
+import de.hrs.mail.MailService;
 import de.hrs.model.Eurusd;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.mail.MailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 

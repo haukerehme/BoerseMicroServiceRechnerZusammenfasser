@@ -5,6 +5,9 @@ import de.hrs.model.TradeMessage;
 import de.hrs.model.Tradevorhersage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -23,6 +26,7 @@ public class AnalyseMehereVergleichsstrecken {
     int spread;
     String instrument;
     List<Integer> listVergleichsLaenge;
+    MailService mailService;
 
 //    int GewinnzaehlerLong = 0;
 //    int VerlustzaehlerLong = 0;
@@ -56,6 +60,8 @@ public class AnalyseMehereVergleichsstrecken {
         this.auswertungslaenge = auswertungslaenge;
         this.spread = spread;
         this.instrument = instrument;
+        ApplicationContext context = new ClassPathXmlApplicationContext("mail-sender.xml");
+        mailService = (MailService) context.getBean("myMailService");
     }
 
 //    void addiere(Tradevorhersage tmp){
@@ -122,7 +128,7 @@ public class AnalyseMehereVergleichsstrecken {
             Logger.getLogger(AnalyseMehererVergleichsstrecken.class.getName()).log(Level.SEVERE, null, ex);
         }*/
 
-        new MailService().sendMail(tradevorhersageGes);
+        mailService.sendMail(tradevorhersageGes);
 
 //        if(anzFormFound>19 && (GewinnzaehlerLong > VerlustzaehlerLong*2 || GewinnzaehlerShort > VerlustzaehlerShort*2 || (hoherLongGewinn > hoherLongVerlust*2 && hoherLongGewinn > 4 )||(hoherShortGewinn > hoherShortVerlust*2 && hoherShortGewinn > 4))){
 //            String ausgabe = "";
