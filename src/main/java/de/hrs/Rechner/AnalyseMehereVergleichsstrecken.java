@@ -1,5 +1,6 @@
 package de.hrs.Rechner;
 
+import de.hrs.mail.MailService;
 import de.hrs.model.TradeMessage;
 import de.hrs.model.Tradevorhersage;
 import org.slf4j.Logger;
@@ -121,7 +122,7 @@ public class AnalyseMehereVergleichsstrecken {
             Logger.getLogger(AnalyseMehererVergleichsstrecken.class.getName()).log(Level.SEVERE, null, ex);
         }*/
 
-
+        new MailService().sendMail(tradevorhersageGes);
 
 //        if(anzFormFound>19 && (GewinnzaehlerLong > VerlustzaehlerLong*2 || GewinnzaehlerShort > VerlustzaehlerShort*2 || (hoherLongGewinn > hoherLongVerlust*2 && hoherLongGewinn > 4 )||(hoherShortGewinn > hoherShortVerlust*2 && hoherShortGewinn > 4))){
 //            String ausgabe = "";
