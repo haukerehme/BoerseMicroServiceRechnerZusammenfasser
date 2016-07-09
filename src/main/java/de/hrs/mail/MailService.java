@@ -1,6 +1,8 @@
 package de.hrs.mail;
 import de.hrs.model.TradeMessage;
 import de.hrs.model.Tradevorhersage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -8,6 +10,8 @@ import org.springframework.mail.SimpleMailMessage;
  * Created by hrs on 09.07.16.
  */
 public class MailService {
+    public static Logger log = LoggerFactory.getLogger(MailService.class);
+
     private MailSender mailSender;
     private SimpleMailMessage templateMessage;
 
@@ -31,7 +35,7 @@ public class MailService {
         }
         catch (MailException ex) {
             // simply log it and go on...
-            System.err.println(ex.getMessage());
+            log.error(ex.getMessage());
         }
     }
 }
