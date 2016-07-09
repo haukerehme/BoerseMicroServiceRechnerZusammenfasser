@@ -100,15 +100,15 @@ public class AnalyseMehereVergleichsstrecken {
 
         rechner = new RechnerZusammenfasser(this.closewerte, this.closewerte.size()-1, 180, auswertungslaenge, 20,spread,"EUR/USD",true,false);
         tradeTmp = rechner.analyse(/*this.closewerte, this.closewerte.size()-1, 240, auswertungslaenge*/);
-        tradevorhersageGes.addiere(tradeTmp);
+        tradevorhersageGes = tradevorhersageGes.addiere(tradeTmp);
 
         rechner = new RechnerZusammenfasser(this.closewerte, this.closewerte.size()-1, 150, auswertungslaenge, 10,spread,"EUR/USD",true,false);
         tradeTmp = rechner.analyse(/*this.closewerte, this.closewerte.size()-1, 240, auswertungslaenge*/);
-        tradevorhersageGes.addiere(tradeTmp);
+        tradevorhersageGes = tradevorhersageGes.addiere(tradeTmp);
 
         rechner = new RechnerZusammenfasser(this.closewerte, this.closewerte.size()-1, 120, auswertungslaenge, 10,spread,"EUR/USD",true,false);
         tradeTmp = rechner.analyse(/*this.closewerte, this.closewerte.size()-1, 240, auswertungslaenge*/);
-        tradevorhersageGes.addiere(tradeTmp);
+        tradevorhersageGes = tradevorhersageGes.addiere(tradeTmp);
         System.out.println(" Formation "+tradevorhersageGes.getAnzFormFound()+" mal gefunden");
 
         TradeMessage tradeMessage = new TradeMessage(now, "EUR/USD", auswertungslaenge, tradevorhersageGes.getAnzFormFound(), tradevorhersageGes.getGewinnzaehlerLong(), tradevorhersageGes.getMittlererLongGewinn(), tradevorhersageGes.getHoherLongGewinn(), tradevorhersageGes.getSehrHoherLongGewinn(), tradevorhersageGes.getVerlustzaehlerLong(), tradevorhersageGes.getHoherLongVerlust(), tradevorhersageGes.getGeringerShortGewinn(), tradevorhersageGes.getMittlererShortGewinn(), tradevorhersageGes.getHoherShortGewinn(), tradevorhersageGes.getSehrHoherShortGewinn(), tradevorhersageGes.getVerlustzaehlerShort(), tradevorhersageGes.getHoherShortVerlust());
