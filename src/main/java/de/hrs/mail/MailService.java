@@ -23,6 +23,7 @@ public class MailService {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("haukekatha@gmail.com");
         msg.setTo("hrs@logentis.de");
+        msg.setSubject("CFD");
         msg.setText(tradevorhersage.toMailMessage("EUR/USD",20));
 
         try{
