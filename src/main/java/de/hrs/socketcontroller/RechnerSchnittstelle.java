@@ -6,6 +6,8 @@ import de.hrs.mail.MailService;
 import de.hrs.model.Eurusd;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mail.MailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
@@ -39,6 +41,9 @@ public class RechnerSchnittstelle extends Thread{
 
     @Override
     public void run() {
+        ApplicationContext context = new ClassPathXmlApplicationContext("mail-sender.xml");
+        MailService mailService = (MailService) context.getBean("myMailService");
+        mailService.sendMailString("Hallo");
         try {
             socket = new ServerSocket(19999);
             inPacket = new DatagramPacket(inBuf, inBuf.length);

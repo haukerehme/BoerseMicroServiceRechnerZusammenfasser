@@ -23,6 +23,22 @@ public class MailService {
         this.templateMessage = templateMessage;
     }
 
+    public void sendMailString(String text){
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom("haukekatha@gmail.com");
+        msg.setTo("hrs@logentis.de");
+        msg.setSubject("CFD");
+        msg.setText(text);
+
+        try{
+            this.mailSender.send(msg);
+        }
+        catch (MailException ex) {
+            // simply log it and go on...
+            log.error(ex.getMessage());
+        }
+    }
+
     public void sendMail(Tradevorhersage tradevorhersage){
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("haukekatha@gmail.com");
