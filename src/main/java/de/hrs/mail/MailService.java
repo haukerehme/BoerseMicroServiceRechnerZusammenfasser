@@ -20,7 +20,8 @@ public class MailService {
     }
 
     public void sendMail(Tradevorhersage tradevorhersage){
-        SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom("haukekatha@gmail.com");
         msg.setTo("hrs@logentis.de");
         msg.setText(tradevorhersage.toMailMessage("EUR/USD",20));
 
