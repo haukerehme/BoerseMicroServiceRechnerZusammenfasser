@@ -109,7 +109,7 @@ public class AnalyseMehereVergleichsstrecken {
         rechner = new RechnerZusammenfasser(this.closewerte, this.closewerte.size()-1, 120, auswertungslaenge, 10,spread,"EUR/USD",true,false);
         tradeTmp = rechner.analyse(/*this.closewerte, this.closewerte.size()-1, 240, auswertungslaenge*/);
         tradevorhersageGes = tradevorhersageGes.addiere(tradeTmp);
-        System.out.println(" Formation "+tradevorhersageGes.getAnzFormFound()+" mal gefunden");
+        log.info(" Formation "+tradevorhersageGes.getAnzFormFound()+" mal gefunden");
 
         TradeMessage tradeMessage = new TradeMessage(now, "EUR/USD", auswertungslaenge, tradevorhersageGes.getAnzFormFound(), tradevorhersageGes.getGewinnzaehlerLong(), tradevorhersageGes.getMittlererLongGewinn(), tradevorhersageGes.getHoherLongGewinn(), tradevorhersageGes.getSehrHoherLongGewinn(), tradevorhersageGes.getVerlustzaehlerLong(), tradevorhersageGes.getHoherLongVerlust(), tradevorhersageGes.getGeringerShortGewinn(), tradevorhersageGes.getMittlererShortGewinn(), tradevorhersageGes.getHoherShortGewinn(), tradevorhersageGes.getSehrHoherShortGewinn(), tradevorhersageGes.getVerlustzaehlerShort(), tradevorhersageGes.getHoherShortVerlust());
 
@@ -125,9 +125,18 @@ public class AnalyseMehereVergleichsstrecken {
             Logger.getLogger(AnalyseMehererVergleichsstrecken.class.getName()).log(Level.SEVERE, null, ex);
         }*/
 
-        MailService.getInstance().sendMail(tradevorhersageGes);
 
-//        if(anzFormFound>19 && (GewinnzaehlerLong > VerlustzaehlerLong*2 || GewinnzaehlerShort > VerlustzaehlerShort*2 || (hoherLongGewinn > hoherLongVerlust*2 && hoherLongGewinn > 4 )||(hoherShortGewinn > hoherShortVerlust*2 && hoherShortGewinn > 4))){
+        if(
+                tradevorhersageGes.getAnzFormFound()>19 &&
+                (tradevorhersageGes.getGewinnzaehlerLong() > tradevorhersageGes.getVerlustzaehlerLong()*2 ||
+                tradevorhersageGes.getGewinnzaehlerShort() > tradevorhersageGes.getVerlustzaehlerShort()*2 ||
+                (tradevorhersageGes.getHoherLongGewinn() > tradevorhersageGes.getHoherLongVerlust()*2 &&
+                        tradevorhersageGes.getHoherLongGewinn() > 4 )||
+                (tradevorhersageGes.getHoherShortGewinn() > tradevorhersageGes.getHoherShortVerlust()*2 &&
+                        tradevorhersageGes.getHoherShortGewinn() > 4))){
+            
+            MailService.getInstance().sendMail(tradevorhersageGes);
+
 //            String ausgabe = "";
 //            if(this.spread == 1){
 //                ausgabe += "\033[34mTRADEN: Mehrere Vergleichslaengen ;) Instrument: "+this.instrument+" "+this.auswertungslaenge+"min\033[0m";
@@ -145,7 +154,7 @@ public class AnalyseMehereVergleichsstrecken {
 //            } catch (MessagingException ex) {
 //                log.error("Fehler beim Mail senden. Error: {}", ex.toString());
 //            }
-        //}
+        }
     }
 
 }
