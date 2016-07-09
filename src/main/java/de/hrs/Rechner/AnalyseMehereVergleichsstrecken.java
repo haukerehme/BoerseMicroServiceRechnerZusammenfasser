@@ -26,7 +26,6 @@ public class AnalyseMehereVergleichsstrecken {
     int spread;
     String instrument;
     List<Integer> listVergleichsLaenge;
-    MailService mailService;
 
 //    int GewinnzaehlerLong = 0;
 //    int VerlustzaehlerLong = 0;
@@ -60,8 +59,6 @@ public class AnalyseMehereVergleichsstrecken {
         this.auswertungslaenge = auswertungslaenge;
         this.spread = spread;
         this.instrument = instrument;
-        ApplicationContext context = new ClassPathXmlApplicationContext("mail-sender.xml");
-        mailService = (MailService) context.getBean("myMailService");
     }
 
 //    void addiere(Tradevorhersage tmp){
@@ -128,7 +125,7 @@ public class AnalyseMehereVergleichsstrecken {
             Logger.getLogger(AnalyseMehererVergleichsstrecken.class.getName()).log(Level.SEVERE, null, ex);
         }*/
 
-        mailService.sendMail(tradevorhersageGes);
+        MailService.getInstance().sendMail(tradevorhersageGes);
 
 //        if(anzFormFound>19 && (GewinnzaehlerLong > VerlustzaehlerLong*2 || GewinnzaehlerShort > VerlustzaehlerShort*2 || (hoherLongGewinn > hoherLongVerlust*2 && hoherLongGewinn > 4 )||(hoherShortGewinn > hoherShortVerlust*2 && hoherShortGewinn > 4))){
 //            String ausgabe = "";

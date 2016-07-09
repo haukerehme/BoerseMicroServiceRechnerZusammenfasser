@@ -10,6 +10,17 @@ import org.springframework.mail.SimpleMailMessage;
  * Created by hrs on 09.07.16.
  */
 public class MailService {
+
+    private static MailService ourInstance = null;
+
+    private MailService(){
+        ourInstance = this;
+    }
+
+    public static MailService getInstance() {
+        return ourInstance;
+    }
+
     public static Logger log = LoggerFactory.getLogger(MailService.class);
 
     private MailSender mailSender;

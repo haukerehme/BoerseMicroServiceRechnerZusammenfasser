@@ -41,9 +41,6 @@ public class RechnerSchnittstelle extends Thread{
 
     @Override
     public void run() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("mail-sender.xml");
-        MailService mailService = (MailService) context.getBean("myMailService");
-        mailService.sendMailString("Hallo");
         try {
             socket = new ServerSocket(19999);
             inPacket = new DatagramPacket(inBuf, inBuf.length);

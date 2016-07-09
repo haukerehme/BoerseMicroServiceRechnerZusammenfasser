@@ -1,5 +1,6 @@
 package de.hrs;
 
+import de.hrs.mail.MailService;
 import de.hrs.model.Eurusd;
 import de.hrs.socketcontroller.RechnerSchnittstelle;
 import org.apache.log4j.PropertyConfigurator;
