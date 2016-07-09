@@ -25,6 +25,5 @@ public class Main {
     public static void main(String[] args){
         ApplicationContext context = new ClassPathXmlApplicationContext("jdbc-config.xml");
         context.getBean(RechnerSchnittstelle.class).start();
-        //Hallo
     }
 }

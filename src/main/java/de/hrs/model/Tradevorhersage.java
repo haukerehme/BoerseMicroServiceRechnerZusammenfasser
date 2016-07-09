@@ -247,4 +247,41 @@ public class Tradevorhersage {
     public void setAnzFormFound(int anzFormFound) {
         this.anzFormFound = anzFormFound;
     }
+
+    public Tradevorhersage addiere(Tradevorhersage tmp){
+        GewinnzaehlerLong += tmp.getGewinnzaehlerLong();
+        VerlustzaehlerLong += tmp.getVerlustzaehlerLong();
+
+        GewinnzaehlerShort += tmp.getGewinnzaehlerShort();
+        VerlustzaehlerShort += tmp.getVerlustzaehlerShort();
+
+        GenerellPlus += tmp.getGenerellPlus();
+        GenerellMinus += tmp.getGenerellMinus();
+        hohesMinus += tmp.getHohesMinus();
+        hohesPlus  += tmp.getHohesPlus();
+
+        hoherLongVerlust += tmp.getHoherLongVerlust();
+        geringerLongGewinn += tmp.getGeringerLongGewinn();
+        mittlererLongGewinn += tmp.getMittlererLongGewinn();
+        hoherLongGewinn += tmp.getHoherLongGewinn();
+        sehrHoherLongGewinn += tmp.getSehrHoherLongGewinn();
+
+        geringerShortGewinn += tmp.getGeringerShortGewinn();
+        mittlererShortGewinn += tmp.getMittlererShortGewinn();
+        hoherShortGewinn += tmp.getHoherShortGewinn();
+        sehrHoherShortGewinn += tmp.getSehrHoherShortGewinn();
+        hoherShortVerlust += tmp.getHoherShortVerlust();
+        anzFormFound += tmp.getAnzFormFound();
+        return this;
+    }
+
+    public String toMailMessage(String instrument, int auswertungslaenge){
+        String ausgabe = "";
+        ausgabe += "\033[34mTRADEN: Mehrere Vergleichslaengen ;) Instrument: "+instrument+" "+auswertungslaenge+"min\033[0m";
+        ausgabe += "\nLong:   GEWINN: "+GewinnzaehlerLong+"/"+anzFormFound+" , "+sehrHoherLongGewinn+"/"+GewinnzaehlerLong+" , "+hoherLongGewinn+"/"+GewinnzaehlerLong+" , "+mittlererLongGewinn+"/"+GewinnzaehlerLong+" , "+geringerLongGewinn+"/"+GewinnzaehlerLong;
+        ausgabe += "\nLong:   VERLUST: "+VerlustzaehlerLong+"/"+anzFormFound+" , "+hoherLongVerlust+"/"+VerlustzaehlerLong;
+        ausgabe += "\nShort:   GEWINN: "+GewinnzaehlerShort+"/"+anzFormFound+" , "+sehrHoherShortGewinn+"/"+GewinnzaehlerShort+" , "+hoherShortGewinn+"/"+GewinnzaehlerShort+" , "+mittlererShortGewinn+"/"+GewinnzaehlerShort+" , "+geringerShortGewinn+"/"+GewinnzaehlerShort;
+        ausgabe += "\nShort:   VERLUST: "+VerlustzaehlerShort+"/"+anzFormFound+" , "+hoherShortVerlust+"/"+VerlustzaehlerShort+"\n";
+        return ausgabe;
+    }
 }
